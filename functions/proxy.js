@@ -15,7 +15,30 @@ export async function onRequestGet(context) {
   if (!id || !CHANNELS[id]) {
     return new Response("Channel not found", { status: 404 });
   }
+ const blockedAgents = [
+        "mahotv.finale"
+        ];
 
+    
+    const allowedCountries = ["ID", "TL"];
+    const allowedAgents = [
+      "ott navigator", "tivimate", "tivimate premium", "tvirl",
+      "pvrlive", "ott tv", "ott player", "tizen",
+      "smart-tv", "m3u-ip.tv", "xciptv", "televizo"
+    ];
+    const blockedISPKeywords = [
+      "cloud", "google", "aws", "amazon", "digitalocean",
+      "linode", "ovh", "anym", "vultr", "host", "oracle", "choopa", "microsoft", "azure"
+    ];
+
+    const isBlockedUA = blockedAgents.some(keyword => ua.toLowerCase().includes(keyword));
+    const isAllowed = allowedAgents.some(agent => ua.toLowerCase().includes(agent));
+    const isBlockedISP = blockedISPKeywords.some(keyword => org.toLowerCase().includes(keyword));
+
+    if (!allowedCountries.includes(country) || !isAllowed || isBlockedISP || isBlockedUA || request.method !== "GET") {
+      return Response.redirect("https://auth.semar.my.id/", 302);
+    }
+  
   const targetUrl = CHANNELS[id];
 
   const upstream = await fetch(targetUrl, {
