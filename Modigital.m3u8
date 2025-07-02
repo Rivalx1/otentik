@@ -1,4 +1,13 @@
 #EXTM3U
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-#EXT-X-STREAM-INF:BANDWIDTH=500000
-http://m1-max.dns-speedy.com:80/live/310533129D4368C/09D46A497281017/1505856.m3u8
+#EXT-X-VERSION:3
+#EXT-X-MEDIA-SEQUENCE:0
+#EXT-X-ALLOW-CACHE:YES
+#EXT-X-TARGETDURATION:11
+#EXTINF:10.080000,
+#EXTVLCOPT:http-referrer=https://m.vidio.com
+#EXTVLCOPT:http-user-agent=Mozilla/5.0
+https://newfamilytv.my.id/vid/vid.m3u8?id=206
+#EXTINF:10.080000,
+#EXTVLCOPT:http-referrer=https://m.vidio.com
+#EXTVLCOPT:http-user-agent=Mozilla/5.0
+https://mastertv.tech/vid/vid.m3u8?id=206
