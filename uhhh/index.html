@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slebeww</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    textarea, input { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 10px; padding: 8px 15px; }
+</style>
+</head>
+<body>
+
+<h1>Tes  Wak</h1>
+<label>URL JSON:</label>
+<input type="text" id="jsonUrl" value="https://beww.pl/unta">
+<button id="fetchBtn">Fetch & Convert</button>
+<button id="downloadBtn" disabled>Download M3U</button>
+<textarea id="output" placeholder="Hasil M3U akan muncul di sini..."></textarea>
+
+<script>
+document.getElementById('fetchBtn').addEventListener('click', async function() {
+    const url = document.getElementById('jsonUrl').value.trim();
+    if (!url) return alert("Masukkan URL JSON!");
+
+    try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        const m3u = convertToM3U(Array.isArray(data) ? data : [data]);
+        document.getElementById('output').value = m3u;
+        document.getElementById('downloadBtn').disabled = false;
+    } catch (err) {
+        alert("Gagal ambil JSON: " + err.message);
+    }
+});
+
+function convertToM3U(list) {
+    let output = '#EXTM3U\n';
+    list.forEach(item => {
+        const liga = item.liga || '';
+        const pertandingan = item.pertandingan || '';
+        const id = item.id || '';
+        const link = item.link || '';
+        output += `#EXTINF:-1 tvg-id="${id}" group-title="${liga}", ${pertandingan}\n${link}\n`;
+    });
+    return output;
+}
+
+document.getElementById('downloadBtn').addEventListener('click', function() {
+    const blob = new Blob([document.getElementById('output').value], { type: 'audio/x-mpegurl' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'playlist.m3u';
+    a.click();
+    URL.revokeObjectURL(url);
+});
+</script>
+
+</body>
+</html>
