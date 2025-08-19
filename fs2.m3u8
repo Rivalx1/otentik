@@ -1,5 +1,5 @@
 #EXTM3U
 #EXT-X-STREAM-INF:AVERAGE-BANDWIDTH=2500000,BANDWIDTH=2700000,RESOLUTION=1280x720,FRAME-RATE=60.000,CODECS="avc1.4d401f,mp4a.40.2",CLOSED-CAPTIONS=NONE
 http://ffg.gogo8k.me/play/live.php?mac=00:1A:79:78:EB:5F&stream=429587&extension=ts&play_token=AXrixUqLyS
-http://exm3u.extraott.com:80/live/ZUL96376/UG4VTW4E/181441.m3u8
+#http://exm3u.extraott.com:80/live/ZUL96376/UG4VTW4E/181441.m3u8
 #http://primestreams.tv:826/live/SF11/vulwBvtfo9/109152.m3u8
